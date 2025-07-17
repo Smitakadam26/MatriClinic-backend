@@ -6,8 +6,8 @@ async function getusers(req, res) {
     const users = await Patient.find();
     res.status(200).json(users);
   } catch (error) {
-    console.error("Error fetching users:", err); // Log the error for debugging
-    res.status(500).json({ error: err.message });
+    console.error("Error fetching users:", error); // Log the error for debugging
+    res.status(500).json({ error: error.message });
   }
 }
 async function postuser(req, res) {

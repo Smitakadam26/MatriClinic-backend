@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
 require('dotenv').config();
-const secret = process.env.SECRET_API;
 
 function createtoken(user){
     const payload ={
@@ -8,12 +7,12 @@ function createtoken(user){
         email:user.email,
         mobileNumber:user.mobileNumber,
     }
-    const token = jwt.sign(payload,secret);
+    const token = jwt.sign(payload,process.env.SECRET_API);
     return token;
 }
 
 function validationtoken (token) {
-    const payload = jwt.verify(token,secret);
+    const payload = jwt.verify(token,process.env.SECRET_API);
     return payload;
 }
 
