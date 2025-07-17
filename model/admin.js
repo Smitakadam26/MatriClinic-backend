@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { error } = require("node:console");
 const {createHmac,randomBytes} = require('node:crypto');
 const { createtoken } = require("../services/authentication");
 const schema = new mongoose.Schema({
