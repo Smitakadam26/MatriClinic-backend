@@ -13,7 +13,6 @@ const doctorroute = require('./routes/doctors')
 const Appointmentroute = require('./routes/Appointments')
 const adminroute = require('./routes/admin')
 
-// Instead of just localhost, allow your deployed frontend too:
 const allowedOrigins = [
   "http://localhost:3000",
   "https://matri-clinic-frontend.vercel.app"
@@ -27,7 +26,7 @@ app.use(cors({
       callback(new Error("Not allowed by CORS"));
     }
   },
-  credentials: true // if using cookies or auth headers
+  credentials: true 
 }));
 app.use('/admin',adminroute)
 app.use('/patients',userroute)
