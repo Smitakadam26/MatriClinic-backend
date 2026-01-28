@@ -6,7 +6,7 @@ async function getusers(req, res) {
     const users = await Patient.find();
     res.status(200).json(users);
   } catch (error) {
-    console.error("Error fetching users:", error); // Log the error for debugging
+    console.error("Error fetching users:", error); 
     res.status(500).json({ error: error.message });
   }
 }
@@ -43,7 +43,7 @@ async function getuserbyId(req, res) {
     console.log(patient);
     res.status(200).json(patient);
   } catch (error) {
-    console.error("Error fetching users:", error); // Log the error for debugging
+    console.error("Error fetching users:", error); 
     res.status(500).json({ error: error.message });
   }
 }
@@ -69,12 +69,12 @@ async function edituserbyid(req, res) {
     const updatedResult = await Patient.findByIdAndUpdate(
       id,
       updateFields,
-      { new: true } // return updated document
+      { new: true }
     );
       res.status(200).json(updatedResult);
       console.log("result is", updatedResult);
   } catch (error) {
-    console.error("Error updating users:", error); // Log the error for debugging
+    console.error("Error updating users:", error); 
     res.status(500).json({ error: error.message });
   }
 }
