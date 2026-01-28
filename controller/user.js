@@ -71,7 +71,6 @@ async function edituserbyid(req, res) {
       updateFields,
       { new: true } // return updated document
     );
-
       res.status(200).json(updatedResult);
       console.log("result is", updatedResult);
   } catch (error) {
