@@ -101,7 +101,6 @@ async function signin(req, res) {
     if (!patient) {
       return res.status(404).json({ message: "User not found" });
     }
-    console.log(patient);
     const token = await Patient.matchpassword(email, password);
 
     if (!token) {
@@ -119,8 +118,7 @@ async function signin(req, res) {
         message: "Login successful",
         patient: {
           id: patient._id,
-          name: patient.name,
-          email: patient.email,
+          role:"patient"
         },
       });
   } catch (err) {
