@@ -15,7 +15,7 @@ async function getadminbyId(req, res) {
     const admin = await Admin.findOne({ _id: `${id}` });
     res.status(200).json(admin);
   } catch (error) {
-    console.error("Error fetching users:", error); // Log the error for debugging
+    console.error("Error fetching users:", error); 
     res.status(500).json({ error: error.message });
   }
 }
@@ -24,10 +24,10 @@ async function postadmin(req, res) {
     console.log("Request body:", req.body);
     const newUser = new Admin(req.body);
     const result = await newUser.save();
-    console.log("Patient Register:", result); // Log the saved product for debugging
+    console.log("Patient Register:", result); 
     res.status(200).json(result);
   } catch (err) {
-    console.error("Error saving product:", err); // Log the error for debugging
+    console.error("Error saving product:", err); 
     res.status(500).json({ error: err.message });
   }
 }
@@ -59,6 +59,7 @@ async function signin(req, res) {
       .json({
         admin: {
           id: admin._id,
+          role:"admin"
         },
       });
   } catch (err) {
