@@ -181,8 +181,13 @@ async function resetpassword(req, res) {
   }
 }
 async function logout(req, res) {
-  res.clearCookie("token");
-  return res.json({ Status: true });
+   try {
+    res.clearCookie("token", { httpOnly: true, sameSite: "strict" });
+    res.status(200).json({ message: "Logged out" });
+  } catch (err) {
+    console.error("Logout error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
 }
 module.exports = {
   postuser,
