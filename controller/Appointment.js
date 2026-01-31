@@ -41,7 +41,7 @@ async function getappointmentslots(req, res) {
       "22:00 PM",
     ];
     const availableSlots = allSlots.filter(
-      (time) => !bookedSlots.includes(time)
+      (time) => !bookedSlots.includes(time),
     );
     console.log(availableSlots);
     res.status(200).json({ date, availableSlots });
@@ -69,38 +69,29 @@ async function getpatientappoint(req, res) {
 }
 async function postappointment(req, res) {
   try {
-    console.log("Request body:", req.body);
-    console.log("Uploaded files:", req.files);
-    const labtestfile = req.files.labtestfile
-      ? req.files.labtestfile[0].filename
-      : null;
-    const ultrasonicreport = req.files.ultrasonicreport
-      ? req.files.ultrasonicreport[0].filename
-      : null;
-    const bloodtestfile = req.files.bloodtestfile
-      ? req.files.bloodtestfile[0].filename
-      : null;
-    const urinetestfile = req.files.urinetestfile
-      ? req.files.urinetestfile[0].filename
-      : null;
-    const stresstestfile = req.files.stresstestfile
-      ? req.files.stresstestfile[0].filename
-      : null;
-    const data = {
+
+    const getFileUrl = (file) => (file ? file[0].path : null);
+
+    const appointmentData = {
       ...req.body,
-      labtestfile: labtestfile,
-      ultrasonicreport: ultrasonicreport,
-      bloodtestfile: bloodtestfile,
-      urinetestfile: urinetestfile,
-      stresstestfile: stresstestfile,
+      date: new Date(`${req.body.date}T00:00:00`),
+
+      labtestfile: getFileUrl(req.files?.labtestfile),
+      bloodtestfile: getFileUrl(req.files?.bloodtestfile),
+      urinetestfile: getFileUrl(req.files?.urinetestfile),
+      stresstestfile: getFileUrl(req.files?.stresstestfile),
+      ultrasonicreport: getFileUrl(req.files?.ultrasonicreport),
     };
-    const newProduct = new Appointments(data);
-    const result = await newProduct.save();
-    console.log("Appointement and record saved:", result); // Log the saved product for debugging
-    res.status(200).json(result);
-  } catch (err) {
-    console.error("Error saving product:", err); // Log the error for debugging
-    res.status(500).json({ error: err.message });
+
+    const appointment = await Appointments.create(appointmentData);
+    const savedAppointment = await appointment.save();
+    res.status(200).json({
+      message: "Appointment saved successfully",
+      data: savedAppointment,
+    });
+  } catch (error) {
+    console.error("Upload error:", error);
+    res.status(500).json({ error: error.message });
   }
 }
 async function gettodaysappointments(req, res) {
@@ -148,7 +139,7 @@ async function editvisitstatus(req, res) {
     const updatedResult = await Appointments.findByIdAndUpdate(
       id,
       updateFields,
-      { new: true } // return updated document
+      { new: true }, // return updated document
     );
     res.status(200).json(updatedResult);
   } catch (error) {
@@ -166,7 +157,7 @@ async function editappointment(req, res) {
     const updatedResult = await Appointments.findByIdAndUpdate(
       id,
       updateFields,
-      { new: true } // return updated document
+      { new: true }, 
     );
     console.log(updatedResult);
     res.status(200).json(updatedResult);

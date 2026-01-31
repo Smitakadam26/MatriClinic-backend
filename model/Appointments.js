@@ -74,22 +74,19 @@ const schema = new mongoose.Schema({
   fetalMovement: {
     type: String,
   },
-  labtestfile: {
+  labTestFile: {
     type: String,
   },
-  ultrasonicreport: {
+  ultraSonicReport: {
     type: String,
   },
-  ultrasonicreportType: {
+  stressTestFile: {
     type: String,
   },
-  stresstestfile: {
+  bloodTestFile: {
     type: String,
   },
-  bloodtestfile: {
-    type: String,
-  },
-  urinetestfile: {
+  urineTestFile: {
     type: String,
   },
   isvisited: {
