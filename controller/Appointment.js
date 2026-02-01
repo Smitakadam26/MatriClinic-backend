@@ -76,11 +76,11 @@ async function postappointment(req, res) {
       ...req.body,
       date: new Date(`${req.body.date}T00:00:00`),
 
-      labtestfile: getFileUrl(req.files?.labtestfile),
-      bloodtestfile: getFileUrl(req.files?.bloodtestfile),
-      urinetestfile: getFileUrl(req.files?.urinetestfile),
-      stresstestfile: getFileUrl(req.files?.stresstestfile),
-      ultrasonicreport: getFileUrl(req.files?.ultrasonicreport),
+      labTestFile: getFileUrl(req.files?.labTestFile),
+      bloodTestFile: getFileUrl(req.files?.bloodTestFile),
+      urineTestFile: getFileUrl(req.files?.urineTestFile),
+      stressTestFile: getFileUrl(req.files?.stressTestFile),
+      ultraSonicReport: getFileUrl(req.files?.ultraSonicReport),
     };
 
     const appointment = await Appointments.create(appointmentData);
