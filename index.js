@@ -15,7 +15,7 @@ const adminroute = require('./routes/admin')
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://fashion-eccomerce-web-client.vercel.app"
+  "https://matri-clinic-frontend.vercel.app"
 ];
 
 app.use(cors({
